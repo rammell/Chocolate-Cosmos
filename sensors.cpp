@@ -47,6 +47,3 @@ long panelStatus(void) {
   return val;
 }
 
-  
-}
-

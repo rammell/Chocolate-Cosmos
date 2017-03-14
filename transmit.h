@@ -13,9 +13,9 @@ extern XBee Gxbee;
 #ifndef TRANSMIT_H
 #define TRANSMIT_H
 
-void clear_Packet(void);
-void make_Packet(int Gcount);
-void send_Packet(void);
+void clear_packet(void);
+void make_packet(int Gcount);
+void send_packet(void);
 void test(void);
 
 #endif
