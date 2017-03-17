@@ -3,5 +3,3 @@ Chocolate Cosmos is the innovator in developing clean energy and contemporary we
 
 This is our github repository. All the code here is for our weatherbox. We pull data from sensors, and package them into a packet. Using an Xbee, we send the packet to the database, where it's processed. The data will be used by our Forecasting team to predict weather patterns.
 
-420
-test kenneth
