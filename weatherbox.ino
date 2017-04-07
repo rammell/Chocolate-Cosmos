@@ -2,7 +2,7 @@
 
 /* Libraries */
 #include "config.h"
-#include "sensor.h"
+#include "sensors.h"
 #include "transmit.h"
 #include "schema.h"
 #include "routine.h"
@@ -14,21 +14,24 @@
 #include <XBee.h>
 #include <EEPROM.h>
 
-schema_1 Gpacket;
-XBee Gxbee = Xbee();
+#define DEBUG 1
+schematop Gpacket;
+XBee Gxbee = XBee();
 int globalcount = 0;
 
 void setup() {
   // put your setup code here, to run once:
-  sensor_init();
+  /*sensor_init();
   Serial.begin(9600);
   Gxbee.begin(Serial);
 
   clear_packet();
-
+*/
+  Serial.begin(9600);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  routine(&globalcount);
+  //routine(&globalcount);
+  Serial.print("Test\n");
 }

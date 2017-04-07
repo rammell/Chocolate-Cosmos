@@ -1,4 +1,7 @@
-#include <"transmit.h"
+#include "transmit.h"
+
+extern schematop Gpacket;
+extern XBee Gxbee;
 
 void clear_packet(void) {
   #ifdef DEBUG
@@ -8,8 +11,8 @@ void clear_packet(void) {
   /*Sensor Readings*/
   Gpacket.address = EEPROM.read(2) | (EEPROM.read(3) << 8);;
   Gpacket.uptime_ms = 0;
-  Gpacket.pressrue_pa = 0;
-  Gpacket.humudity_centi_pct = 0;
+  Gpacket.pressure_pa = 0;
+  Gpacket.humidity_centi_pct = 0;
   Gpacket.temperature_c = 0;
 
   /*Voltages*/
@@ -42,14 +45,14 @@ void make_packet(int Gcount) {
 	unsigned long uptime = 0;
 
 	/*Pulling Sensor Data*/
-	BatterymV = battStatus();
+	//BatterymV = battStatus();
 	PanelmV = panelStatus();
 	SolarIrradmV = sSolIrrad();
 
 	/*Packing Health Status Data*/
 	Gpacket.batt_mv = BatterymV;
 	Gpacket.panel_mv = PanelmV;
-	Gpacket.solarirrad_w_m2 = SolarIrradmV;
+	Gpacket.solirrad_w_m2 = SolarIrradmV;
 
 	/*Pack Rest of Data*/
 	Humiditypct = sHumidity();
@@ -60,7 +63,7 @@ void make_packet(int Gcount) {
 	Gpacket.temperature_c = Tempdecic;
 
 	uptime = millis();
-	Gpacket_ms = uptime;
+	Gpacket.uptime_ms = uptime;
 
 #ifdef DEBUG
 	Serial.print("\nPanelmV Data:");
@@ -83,7 +86,7 @@ void send_packet() {
 	int len = 0;
 
 	//Obtain address of Xbee
-	XBeeAddress64 addr64 = XbeeAddress64(0x0, 0x0);
+	XBeeAddress64 addr64 = XBeeAddress64(0x0, 0x0);
 
 	//Clear payload
 	uint8_t payload[MAX_SIZE];
@@ -96,7 +99,7 @@ void send_packet() {
 
 	//Send payload
 	ZBTxRequest xbTx = ZBTxRequest(addr64, payload, len);
-	Gxbee.send(zbTx); //Prints packet to serial monitor
+	Gxbee.send(xbTx); //Prints packet to serial monitor
 }
 
 void test() {
@@ -106,7 +109,7 @@ void test() {
 	long pressure_test = 4;
 	long humidity_test = 5;
 	long temperature_test = 6;
-	unsigned long uptime 1337;
+	unsigned long uptime = 1337;
 
 	//DEBUG
 	Serial.println(F("Making bin"));
@@ -114,7 +117,7 @@ void test() {
 	//Makes test packet
 	Gpacket.batt_mv = batt_mv_test;
 	Gpacket.panel_mv = panel_mv_test;
-	Gpacket.solarirrad_w_m2 = solirrad_test;
+	Gpacket.solirrad_w_m2 = solirrad_test;
 	Gpacket.pressure_pa = pressure_test;
 	Gpacket.humidity_centi_pct = humidity_test;
 	Gpacket.temperature_c = temperature_test;

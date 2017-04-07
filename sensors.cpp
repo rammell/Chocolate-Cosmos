@@ -1,5 +1,5 @@
 /*Internal Libraries*/
-#include "sensor.h"
+#include "sensors.h"
 #include "config.h"
 
 /* Objects */
@@ -8,19 +8,19 @@ Adafruit_BMP085 bmp085;
 
 
 void sensor_init(void) {
-  bmp085.begin;
+  bmp085.begin();
 }
 
 /*HUMUDITY*/
 long sHumidity(void) {
-  long val = sht1x.readhumidity();
+  long val = sht1x.readHumidity();
   return val;
 }
 
 /*PRESSURE*/
 long sPressure(void) {
   long val = bmp085.readPressure();
-  return value;
+  return val;
 }
 
 /*TEMPERATURE*/
@@ -43,7 +43,7 @@ long battStatus(void) {
 
 /*SOLAR PANEL*/
 long panelStatus(void) {
-  long val = 2 * (analogRead(PANEL_PIN) * (5000.0/1023);
+  long val = 2 * (analogRead(PANEL_PIN) * (5000.0/1023));
   return val;
 }
 
