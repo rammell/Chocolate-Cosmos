@@ -6,8 +6,6 @@
 
 #define MAX_SIZE 80
 
-
-
 #ifndef TRANSMIT_H
 #define TRANSMIT_H
 
@@ -17,3 +15,8 @@ void send_packet(void);
 void test(void);
 
 #endif
+
+
+
+
+

@@ -16,3 +16,8 @@ long sTemperature(void);
 long batteryStatus(void);
 long panelStatus(void);
 
+
+
+
+
+

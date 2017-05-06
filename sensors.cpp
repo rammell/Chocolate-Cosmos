@@ -25,7 +25,7 @@ long sPressure(void) {
 
 /*TEMPERATURE*/
 long sTemperature(void) {
-  long val = bmp085.readTemperature();
+  long val = sht1x.readTemperatureF();
   return val;
 }
 
@@ -46,4 +46,9 @@ long panelStatus(void) {
   long val = 2 * (analogRead(PANEL_PIN) * (5000.0/1023));
   return val;
 }
+
+
+
+
+
 

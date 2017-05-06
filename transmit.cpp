@@ -86,7 +86,7 @@ void send_packet() {
 	int len = 0;
 
 	//Obtain address of Xbee
-	XBeeAddress64 addr64 = XBeeAddress64(0x0, 0x0);
+	XBeeAddress64 addr64 = XBeeAddress64(0x0000, 0xFFFF);
 
 	//Clear payload
 	uint8_t payload[MAX_SIZE];
@@ -95,11 +95,15 @@ void send_packet() {
 	memset(payload, '\0', sizeof(payload));
 
 	//Load payload
-	memcpy(payload, &Gpacket, len);
+	memcpy(payload, &Gpacket, sizeof(payload));
+
+  for(int i = 0; i < MAX_SIZE; i++) { Serial.write(payload[i]);}
 
 	//Send payload
-	ZBTxRequest xbTx = ZBTxRequest(addr64, payload, len);
-	Gxbee.send(xbTx); //Prints packet to serial monitor
+	ZBTxRequest zbTx = ZBTxRequest(addr64, payload, sizeof(payload));
+ Serial.println("Sending packet");
+	Gxbee.send(zbTx); //Prints packet to serial monitor
+ Serial.println("Packet sent");
 }
 
 void test() {
@@ -112,7 +116,7 @@ void test() {
 	unsigned long uptime = 1337;
 
 	//DEBUG
-	Serial.println(F("Making bin"));
+	Serial.println(("Making bin"));
 
 	//Makes test packet
 	Gpacket.batt_mv = batt_mv_test;
@@ -121,4 +125,12 @@ void test() {
 	Gpacket.pressure_pa = pressure_test;
 	Gpacket.humidity_centi_pct = humidity_test;
 	Gpacket.temperature_c = temperature_test;
+ Serial.println("Test packet made");
+
+
 }
+
+
+
+
+

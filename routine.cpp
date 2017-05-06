@@ -12,9 +12,14 @@ void routine(int *count)
   if((*count) >= 60){
     send_packet();
     clear_packet();
-    (*count);
+    (*count) = 0;
     
   }
  while ((millis() - transmit_timer) <= wait_ms); 
 }
+
+
+
+
+
 

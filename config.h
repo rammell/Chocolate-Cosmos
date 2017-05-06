@@ -1,6 +1,6 @@
 /*HUMIDITY*/
-#define H_CLK_PIN 7
-#define H_DATA_PIN 8
+#define H_CLK_PIN 11
+#define H_DATA_PIN 10
 
 /*SOLAR IRRADIANCE*/
 #define APOGEE_PIN A2
@@ -26,3 +26,8 @@
 /* I2C/Pressure */
 #define _PIN_SDA A4
 #define _PIN_SCL A5
+
+
+
+
+
